@@ -1,0 +1,10 @@
+# Generated source extractions, compiler output, image manifests, and logs
+/out/
+
+# Host-specific environment overrides
+/.env
+
+openspec/
+.kiro/
+.claude/
+reference/

@@ -1,0 +1,2 @@
+# Add only source-provenance-reviewed DXG patches, one relative patch path per line.
+# The empty series is valid during the local-only scaffold phase.

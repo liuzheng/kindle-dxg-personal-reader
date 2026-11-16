@@ -1,0 +1,2 @@
+# Each proven legacy DXG component will be added as a separate module target.
+obj-m += dxg_legacy_stub.o

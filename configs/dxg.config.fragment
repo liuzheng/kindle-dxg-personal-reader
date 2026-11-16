@@ -1,0 +1,18 @@
+# Provisional local-only fragment for Linux 6.18.63.
+# Apply it to upstream imx_v4_v5_defconfig. This is not a verified DXG defconfig.
+# Board, memory, NAND, display, input, PMIC, and USB wiring stay unresolved.
+CONFIG_ARCH_MULTI_V5=y
+CONFIG_ARCH_MXC=y
+CONFIG_MTD=y
+CONFIG_MTD_NAND_CORE=y
+CONFIG_SERIAL_IMX=y
+CONFIG_SERIAL_IMX_CONSOLE=y
+CONFIG_USB_GADGET=y
+CONFIG_USB_CONFIGFS=y
+CONFIG_USB_CONFIGFS_MASS_STORAGE=y
+CONFIG_MODULES=y
+CONFIG_MODULE_UNLOAD=y
+CONFIG_DEVTMPFS=y
+CONFIG_DEVTMPFS_MOUNT=y
+CONFIG_BLK_DEV_INITRD=y
+CONFIG_INITRAMFS_SOURCE=""
