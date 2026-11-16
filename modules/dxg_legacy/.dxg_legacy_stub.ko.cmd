@@ -1,0 +1,1 @@
+savedcmd_dxg_legacy_stub.ko := arm-linux-gnueabi-ld -r -EL -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T /workspace/out/build-armv5/scripts/module.lds -o dxg_legacy_stub.ko dxg_legacy_stub.o dxg_legacy_stub.mod.o .module-common.o

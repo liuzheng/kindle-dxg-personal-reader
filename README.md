@@ -17,7 +17,8 @@ This repository prepares a Linux 6.18.63 porting project for an original Kindle 
 - `modules/dxg_legacy/`: external-module build scaffold, not a hardware driver.
 - `patches/`: ordered future patch list. It is empty until source provenance is verified.
 - `rootfs/initramfs/`: source layout for a diagnostic initramfs.
-- `scripts/`: host-only inspection, prerequisite, build, and manifest tools.
+- `scripts/`: host-only inspection, prerequisite, native preflight, container-build, and manifest tools.
+- `container/`: pinned Linux kernel-build environment definition.
 - `out/`: ignored extracted sources, build products, images, and logs.
 
 ## Local validation
