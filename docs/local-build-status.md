@@ -5,7 +5,9 @@ Date: 2026-11-16
 ## Completed host-side validation
 
 - All five immutable input artifacts in `reference/` match `reference/ARTIFACTS.sha256`.
-- `reference/linux-6.18.63.tar.xz` is present as the pinned kernel source input.
+- `reference/linux-6.18.63.tar.xz` was extracted only below ignored `out/src/` and the generic i.MX ARMv4/v5 configuration was generated only below ignored `out/build-armv5/`.
+- The provisional ARMv5 build configuration reports kernel release `6.18.63` and has SHA-256 `765ed66bbfbb9e4e71adc36012515724c577576cfca2e8e864c370ad671fa192`.
+- The native macOS build reached host-tool compilation and stopped in Linux `scripts/sorttable.c` because the Darwin host does not provide `<elf.h>`. This is a Linux-host build dependency failure, not an ARM target or DXG hardware result.
 - The Python 3 update inspector validated both supplied FC02 DXG packages as device code 9 and validated their decoded payload MD5 values.
 - Member listing succeeded in memory for `update-caupdate-09.bin`; no payload was written to the workspace.
 - Shell syntax validation passed for every host-only script and the initramfs entry point.
@@ -18,13 +20,15 @@ Date: 2026-11-16
 
 | Requirement | Result | Effect |
 | --- | --- | --- |
-| GNU Make 4.0 or newer | Missing: host has GNU Make 3.81 | Linux 6.18 build is blocked before source extraction. |
-| 32-bit ARM Linux cross compiler | Missing: `arm-linux-gnueabi-gcc` | Linux and external-module builds are blocked. |
+| GNU Make 4.0 or newer | Available: Homebrew GNU Make 4.4.1 as `gmake` | The kernel build uses `gmake` by default. |
+| 32-bit ARM cross compiler | Available: `arm-none-eabi-gcc` 16.2.0 | Suitable for the current kernel-only generic ARMv5 baseline. |
+| Linux host build environment | Missing | Required because the Linux source builds host tools that include `<elf.h>`, absent on macOS. |
 | Static ARM BusyBox | Not provided | Diagnostic initramfs packaging is blocked. |
 | `mkimage` | Not installed intentionally | Not needed until the target U-Boot image format is proved. |
+| Docker runtime | Available: 29.5.2 | Docker Buildx is unavailable, and no pinned Linux build image has been selected. |
 
 ## Physical-device blockers
 
 No Kindle interaction occurred. The project has not jailedbroken, connected to, mounted, uploaded to, flashed, or otherwise altered a device. `hardware-blockers.md` lists the evidence required before physical bring-up can begin.
 
-A local generic ARMv5 baseline build becomes available only when the user supplies or explicitly authorizes acquisition of a pinned GNU Make 4+ and 32-bit ARM Linux cross-toolchain environment. A successful result will still not prove DXG bootability.
+A complete local generic ARMv5 baseline build and external-module compile now require a pinned Linux-hosted build environment with the necessary Linux development headers, plus static ARM BusyBox for initramfs packaging. Selecting or downloading that environment is deferred until explicitly instructed. A successful result will still not prove DXG bootability.
