@@ -43,7 +43,9 @@ export KBUILD_BUILD_USER=dxg
 export KBUILD_BUILD_HOST=local
 export KBUILD_BUILD_TIMESTAMP='1970-01-01 00:00:00 UTC'
 "$make_bin" -C "$source_dir" O="$build_dir" imx_v4_v5_defconfig
-"$source_dir/scripts/kconfig/merge_config.sh" -m -O "$build_dir" "$build_dir/.config" "$root/configs/dxg.config.fragment"
+# Do not use upstream merge_config.sh: its GNU readlink -m dependency is absent on macOS.
+# Kconfig consumes later duplicate values from this reviewed local-only fragment.
+cat "$root/configs/dxg.config.fragment" >> "$build_dir/.config"
 "$make_bin" -C "$source_dir" O="$build_dir" olddefconfig
 "$make_bin" -C "$source_dir" O="$build_dir" -j"${JOBS:-2}" zImage modules dtbs
 
